@@ -6,7 +6,7 @@
 
 ## News
 
-[251101] We build the github repository. The detailed implementation of **CROPI** will be released as soon as possible. 
+[251101] We create the github repository. The detailed implementation of **CROPI** will be released as soon as possible. 
 
 ## Framework
 ![framework](figures/CROPI-framework.drawio.png)
