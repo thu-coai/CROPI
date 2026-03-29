@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cropi"
+version = "0.1.0"
+description = "Open-source implementation of CROPI data selection utilities."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "pyarrow>=15.0.0",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+full = [
+  "math-verify",
+  "traker>=0.3.2",
+  "transformers>=4.46,<5",
+]
+
+[project.scripts]
+cropi-compute-inf-score = "cropi.core.compute_inf_score:main"
+cropi-get-grad = "cropi.core.get_grad:main"
+cropi-merge-checkpoint = "cropi.utils.model_merger:main"
+cropi-select = "cropi.core.select:main"
+cropi-split-jsonl = "cropi.utils.split_files:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cropi"]

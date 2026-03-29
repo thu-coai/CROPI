@@ -1,0 +1,10 @@
+archives
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.jsonl.[0-9]*
+wandb
+outputs
+local
+logs
