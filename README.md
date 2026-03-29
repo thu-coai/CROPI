@@ -1,25 +1,5 @@
 # CROPI: Data-Efficient RLVR via Off-Policy Influence Guidance
 
-<<<<<<< HEAD
-=======
-**CROPI** is a curriculum reinforcement learning framework for large language models that brings theoretically grounded, rollout-free data selection to RLVR. It leverages influence functions to estimate how individual data points impact the current online policy using only pre-collected trajectories, enabling efficient and scalable training without costly new rollouts.
-
-
-## News
-
-[251101] We create the github repository. The detailed implementation of **CROPI** will be released as soon as possible. 
-
-## Framework
-![framework](figures/CROPI-framework.drawio.png)
-
-1. **Off-Policy Influence Estimation**: quantifies per-datum impact on the online policy from offline trajectories, with theoretical guarantees and no real-time sampling.
-2. **Scalable gradient handling**: Sparse Random Projection with a simple pre-projection dropout step to compress high-dimensional gradients, reduce numerical noise, and preserve inner products.
-3. **Curriculum RL**: stage-wise training that selects the most influential data at each checkpoint, improving efficiency and performance over full-dataset and heuristic baselines.
-
-## Highlight
-On a 1.5B model, it delivers a **$2.66\times$** step-level acceleration while training on only **10%** of the data per stage—demonstrating the practical gains of influence-based data selection for online RLVR.
-<!-- ![1.5b_curve](figures/1.5B-main-curve.png)-->
->>>>>>> origin/main
 <p align="center">
   <img src="figures/CROPI-logo.png" alt="CROPI logo" width="220">
 </p>
