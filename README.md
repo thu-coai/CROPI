@@ -1,4 +1,4 @@
-# CROPI: Data-Efficient RLVR via Off-Policy Influence Guidance
+# CROPI: Data-Efficient RLVR via Off-Policy Influence Guidance 🚀
 
 <p align="center">
   <img src="figures/CROPI-logo.png" alt="CROPI logo" width="220">
@@ -8,11 +8,16 @@
   <a href="https://arxiv.org/abs/2510.26491"><img src="https://img.shields.io/badge/Paper-arXiv-red.svg" alt="Paper"></a>
 </p>
 
-**CROPI** is a curriculum reinforcement learning framework for large language models that improves RLVR efficiency through **off-policy influence estimation** over pre-collected trajectories. Instead of relying on repeated online trial-and-error to identify useful training data, CROPI estimates which prompts are most helpful for the current policy, selects a compact high-value subset, and then runs RL on that subset.
+**CROPI** is a curriculum reinforcement learning framework for large language models that improves RLVR efficiency through **off-policy influence estimation** over pre-collected trajectories. Instead of relying on repeated online trial-and-error to identify useful training data, CROPI estimates which prompts are most helpful for the current policy, selects a compact high-value subset, and then runs RL on that subset. In short: less wasted compute, more targeted learning, and a much cleaner RL loop. 🎯
 
 Paper: **[Data-Efficient RLVR via Off-Policy Influence Guidance](https://arxiv.org/abs/2510.26491)**
 
-## Why CROPI?
+## News 📣
+
+- 2025-11: CROPI repository initialized 🎉 The project was set up and organized for public release.
+- 2026-03: First public code release 🚀 The initial open-source implementation of the CROPI pipeline is now available.
+
+## Why CROPI? ✨
 
 Large-scale RL for reasoning models is expensive because it spends substantial compute on prompts that contribute little to policy improvement. CROPI addresses this by:
 
@@ -21,9 +26,9 @@ Large-scale RL for reasoning models is expensive because it spends substantial c
 - using **sparse random projection** to make gradient-based scoring practical at scale
 - building a **curriculum over selected data subsets**, rather than training on the full pool at every stage
 
-The result is a more compute-efficient RL loop that keeps or improves downstream performance while substantially reducing the amount of data trained per stage.
+The result is a more compute-efficient RL loop that keeps or improves downstream performance while substantially reducing the amount of data trained per stage. That is the core appeal of CROPI: stronger efficiency without giving up serious performance. 🔥
 
-## Main Idea
+## Main Idea 🧠
 
 <p align="center">
   <img src="figures/CROPI-framework.drawio.png" alt="CROPI framework" width="760">
@@ -38,9 +43,9 @@ CROPI follows three core steps:
 3. **Curriculum RL**
    Select a compact training subset and run RL on that subset, then repeat for the next round.
 
-This makes CROPI particularly attractive when rollout generation is expensive, RL budgets are limited, or you want a more principled curriculum than heuristic filtering.
+This makes CROPI particularly attractive when rollout generation is expensive, RL budgets are limited, or you want a more principled curriculum than heuristic filtering. It is a simple idea operationally, but it unlocks a very strong efficiency story in practice. ⚡
 
-## Results
+## Results 📈
 
 ### 1.5B Main Training Curve
 
@@ -48,7 +53,7 @@ This makes CROPI particularly attractive when rollout generation is expensive, R
   <img src="figures/1.5B-main-curve.png" alt="1.5B main curve" width="720">
 </p>
 
-On the 1.5B setting, CROPI achieves **2.66x step-level acceleration** while training on only **10% of the data per stage**. The key takeaway is not just faster training, but **better use of RL compute**: CROPI focuses updates on prompts that matter most for validation-time improvement.
+On the 1.5B setting, CROPI achieves **2.66x step-level acceleration** while training on only **10% of the data per stage**. The key takeaway is not just faster training, but **better use of RL compute**: CROPI focuses updates on prompts that matter most for validation-time improvement. This is where the method really stands out. 🏎️
 
 ### Overall Comparison
 
@@ -56,7 +61,7 @@ On the 1.5B setting, CROPI achieves **2.66x step-level acceleration** while trai
   <img src="figures/main_result.png" alt="Main result table" width="760">
 </p>
 
-The paper shows that CROPI consistently improves the efficiency-quality tradeoff compared with stronger data-hungry baselines. The method is designed to be practical: it works with realistic RL pipelines and avoids introducing another expensive online loop solely for data scoring.
+The paper shows that CROPI consistently improves the efficiency-quality tradeoff compared with stronger data-hungry baselines. The method is designed to be practical: it works with realistic RL pipelines and avoids introducing another expensive online loop solely for data scoring. Better data selection, less redundant RL, stronger results. ✅
 
 ### Sparse Projection Efficiency
 
@@ -68,11 +73,11 @@ The paper shows that CROPI consistently improves the efficiency-quality tradeoff
   <img src="figures/3B_sparse_projection.png" alt="3B sparse projection" width="520">
 </p>
 
-These results highlight a second advantage of CROPI: the influence-estimation pipeline remains usable even for larger models because it relies on **sparse random projection** rather than storing or comparing raw full-dimensional gradients.
+These results highlight a second advantage of CROPI: the influence-estimation pipeline remains usable even for larger models because it relies on **sparse random projection** rather than storing or comparing raw full-dimensional gradients. That scalability is a big part of why CROPI is practical beyond toy settings. 📦
 
-## Repository Overview
+## Repository Overview 🗂️
 
-This repository contains the open-source implementation of the **CROPI selection and curriculum loop**. The runnable code lives under [`cropi/`](./cropi).
+This repository contains the open-source implementation of the **CROPI selection and curriculum loop**. The runnable code lives under [`cropi/`](./cropi). The goal is to make the paper pipeline easy to inspect, easy to reproduce, and straightforward to extend. 🛠️
 
 ### Repository structure
 
@@ -103,7 +108,7 @@ This repository contains the open-source implementation of the **CROPI selection
 
 You are expected to prepare these assets locally.
 
-## How To Run
+## How To Run ▶️
 
 ### 1. Create the environment with `uv`
 
@@ -176,7 +181,7 @@ This runs:
 1. `cropi-compute-inf-score`
 2. `cropi-select`
 
-and writes the selected parquet under the corresponding dataset directory.
+and writes the selected parquet under the corresponding dataset directory. One command, one selection stage, clean and reproducible. 🎯
 
 ### 5. Run the full CROPI loop from one script
 
@@ -230,11 +235,11 @@ bash cropi/scripts/run_cropi.sh full ./data Qwen2.5-1.5B-Instruct_curriculum
 ### 6. Notes on RL support
 
 - `run_cropi.sh` is the **supported public entry point** for the full iterative pipeline.
-- The script now supports **8-GPU RL** by default.
+- The script now supports **8-GPU RL** by default. 🖥️
 - After each RL stage, the script exports the actor checkpoint to `huggingface/` format so the next CROPI stage can reuse it directly.
 - If your RL environment is separate from the CROPI environment, point `RL_PYTHON` to that interpreter.
 
-## Acknowledgements
+## Acknowledgements 🙏
 
 We thank the following projects and teams for making this work possible:
 
@@ -244,11 +249,11 @@ We thank the following projects and teams for making this work possible:
 - [Qwen2.5-Math](https://github.com/QwenLM/Qwen2.5-Math) for math-oriented model and evaluation resources
 - [vLLM](https://github.com/vllm-project/vllm) for efficient rollout generation and serving
 
-We also acknowledge the external math-evaluation tooling used by the original project setup, including the Qwen2.5-Math evaluation pipeline.
+We also acknowledge the external math-evaluation tooling used by the original project setup, including the Qwen2.5-Math evaluation pipeline. This repository builds on a very strong open ecosystem, and we are grateful for it. 🌍
 
-## Citation
+## Citation 📝
 
-If you find this repository useful, please cite our paper:
+If you find this repository useful, please cite our paper. If CROPI helps your research or engineering workflow, a citation is greatly appreciated. 💙
 
 ```bibtex
 @misc{zhu2025dataefficientrlvroffpolicyinfluence,
